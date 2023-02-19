@@ -1,14 +1,18 @@
 package com.employees.checkpoint_project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.ObjectError;
 
 import com.employees.checkpoint_project.model.Employee;
 import com.employees.checkpoint_project.repository.EmployeeRepository;
+
 
 
 @Service
@@ -24,6 +28,7 @@ public class EmployeeService implements EmployeeServiceInterface {
 
     @Override
     public Employee createEmployee(Employee employee) {
+
         return employeeRepository.save(employee);
     }
 
@@ -51,7 +56,6 @@ public class EmployeeService implements EmployeeServiceInterface {
         }else{
             return null;
         }
-        
     }
 
     @Override
@@ -62,6 +66,13 @@ public class EmployeeService implements EmployeeServiceInterface {
         return employee;
     }
 
-    
-
+    @Override
+    public ResponseEntity<?> getAllErrors(List<ObjectError> errors) {
+        List<String> errorMessages = new ArrayList<>();
+            for (ObjectError error : errors) {
+                String errorMessage = error.getDefaultMessage();
+                errorMessages.add(errorMessage);
+            }
+            return ResponseEntity.badRequest().body(errorMessages);
+    }
 }

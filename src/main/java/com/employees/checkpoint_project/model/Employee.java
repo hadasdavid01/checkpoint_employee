@@ -4,22 +4,29 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "employees")
 public class Employee {
 
     @Id
-    @Column(unique = true)
+    @Column(name= "id", unique = true)
     private long id;
 
     @Column(name = "firstName")
+    @NotBlank(message = "First name cant be blank")
     private String firstName;
 
+    
     @Column(name = "lastName")
+    @NotBlank(message = "Last name cant be blank")
     private String lastName;
     
     @Column(name = "email")
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email without correct format")
     private String email;
 
 
