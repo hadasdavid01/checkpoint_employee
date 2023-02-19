@@ -1,5 +1,4 @@
 package com.employees.checkpoint_project.service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +44,7 @@ public class EmployeeService implements EmployeeServiceInterface {
     @Override
     public Employee updateEmplyee(Employee employee, long id) {
         Employee res = getEmployeeById(id);
+
         if(res != null){
             if(employee.getFirstName() != null)
                 res.setFirstName(employee.getFirstName());
@@ -52,6 +52,8 @@ public class EmployeeService implements EmployeeServiceInterface {
                 res.setLastName(employee.getLastName());
             if(employee.getEmail() != null)
                 res.setEmail((employee.getEmail()));
+            if(employee.getNickName() != null)
+                res.setNickName((employee.getNickName()));
             return employeeRepository.save(res);
         }else{
             return null;

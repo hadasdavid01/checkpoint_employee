@@ -29,9 +29,21 @@ public class Employee {
     @Email(message = "Email without correct format")
     private String email;
 
+    @Column(name = "nickName")
+    @NotBlank()
+    private String nickName;
+
 
     public long getId() {
         return this.id;
+    }
+
+    public void setNickName(String nickName){
+        this.nickName=nickName;
+    }
+
+    public String getNickName(){
+        return this.nickName;
     }
 
     public void setId(long id) {

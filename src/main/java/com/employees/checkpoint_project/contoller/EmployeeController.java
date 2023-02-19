@@ -46,14 +46,11 @@ public class EmployeeController {
         if (!errors.isEmpty()) {
             return employeeService.getAllErrors(errors);
         }
-            
         try{
-            Employee res = employeeService.createEmployee(employee);
-            if(employeeService.getEmployeeById(employee.getId()) != null){
+            if(employeeService.getEmployeeById(employee.getId()) != null)
                 return new ResponseEntity<>("Employee with ID already exists", HttpStatus.CONFLICT);
-            }
+            Employee res = employeeService.createEmployee(employee);
             return new ResponseEntity<>(res, HttpStatus.OK);
-            
         }catch(Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
